@@ -1,0 +1,12 @@
+.text-input {
+    width: 100%; 
+    font-size: 20px;
+    padding: 5px 10px;
+    border-color: transparent;
+    border-radius: 10px;
+    transition: 150ms ease-in;
+}
+
+.text-input:focus {
+    outline: none;
+}
