@@ -25,7 +25,9 @@ export const Home = () => {
     })
     : posts;
 
-  // ctrl + espaço para autoimport 
+  // ctrl + espaço para autoimport]
+  // Aqui utilizamos useCallback para que, quando o componente de funçao for re-renderizado, o react engine
+  // não acababe criando outra função 
   const handleLoadPosts = useCallback(async (page, postsPerPage) => {
     const postsWithPhotos = await loadPosts();
     setPosts(postsWithPhotos.slice(page, postsPerPage));
