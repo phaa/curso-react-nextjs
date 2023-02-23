@@ -1,57 +1,32 @@
-import logo from './logo.svg';
+import P from 'prop-types';
 import './App.css';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+
+const Button = React.memo(function Button({ onClick }) {
+  console.log('Filho renderizou');
+  return (
+    <button type="button" onClick={() => onClick(10)}>
+      Increment
+    </button>
+  );
+});
+
+Button.propTypes = {
+  onClick: P.func,
+};
 
 function App() {
-  const [reverse, setReverse] = useState(false);
   const [counter, setCounter] = useState(0);
-  const reverseClass = reverse ? 'reverse' : '';
 
-  const handleClick = () => {
-    // quando utilizamos o recebimento do estado anterior no setState
-    // poderemos garantir a integridade dos dados
-    setReverse((reverse) => !reverse);
-  };
-
-  const handleIncrement = () => {
-    setCounter((counter) => counter + 1);
-  };
-
-  // Sem passar uma lista, o hook é acionado toda vez que o componente for atualizado
-  useEffect(() => {
-    console.log('Component did mount');
+  const handleIncrement = useCallback((num) => {
+    setCounter((counter) => counter + num);
   }, []);
 
-  // Passando uma lista vazia, o hook será acionado apenas na montagem do componente
-  useEffect(() => {
-    console.log('Component did mount');
-  }, []);
-
-  // Passando variáveis na lista, indica que o hook será acionado apenas quando uma
-  // dessa(s) dependência(s) for(em) alteradas
-  useEffect(() => {
-    console.log('Component did mount');
-  }, [reverse]);
-
+  console.log('Renderizou pai');
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className={`App-logo ${reverseClass}`} alt="logo" />
-
-        <h1>Contador: {counter}</h1>
-
-        <p>
-          <button type="button" onClick={handleClick}>
-            Reverse {reverseClass}
-          </button>
-        </p>
-
-        <p>
-          <button type="button" onClick={handleIncrement}>
-            Increment {counter}
-          </button>
-        </p>
-      </header>
+      <h1>Contador: {counter}</h1>
+      <Button onClick={handleIncrement} />
     </div>
   );
 }
