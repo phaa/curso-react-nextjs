@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [reverse, setReverse] = useState(false);
@@ -16,6 +16,22 @@ function App() {
   const handleIncrement = () => {
     setCounter((counter) => counter + 1);
   };
+
+  // Sem passar uma lista, o hook é acionado toda vez que o componente for atualizado
+  useEffect(() => {
+    console.log('Component did mount');
+  }, []);
+
+  // Passando uma lista vazia, o hook será acionado apenas na montagem do componente
+  useEffect(() => {
+    console.log('Component did mount');
+  }, []);
+
+  // Passando variáveis na lista, indica que o hook será acionado apenas quando uma
+  // dessa(s) dependência(s) for(em) alteradas
+  useEffect(() => {
+    console.log('Component did mount');
+  }, [reverse]);
 
   return (
     <div className="App">
