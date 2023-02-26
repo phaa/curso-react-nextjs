@@ -7,7 +7,6 @@ const useMyHook = (callback, delay = 1000) => {
   const savedCallback = useRef();
 
   // Toda vez que mudar o callback, atualiza a ref dele
-  // Aqui sava
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
