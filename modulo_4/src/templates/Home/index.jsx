@@ -32,8 +32,8 @@ export const useFetch = (url, options) => {
   useEffect(() => {
     // wait será para dizer se o hook deve mudar seu estado ou não
     let wait = false;
-    console.log('Effect', new Date().toLocaleString());
-    console.log(optionsRef.current.headers);
+    const controller = new AbortController();
+    const signal = controller.signal();
 
     setLoading(true);
 
@@ -41,7 +41,10 @@ export const useFetch = (url, options) => {
       await new Promise((r) => setTimeout(r, 200));
 
       try {
-        const response = await fetch(urlRef.current, optionsRef.current);
+        const response = await fetch(urlRef.current, {
+          signal,
+          ...optionsRef.current,
+        });
         const jsonResult = await response.json();
 
         if (!wait) {
@@ -67,6 +70,7 @@ export const useFetch = (url, options) => {
       // quando terminar o fetch, a função verificará se ainda
       // pode ou não mudar de estado.
       wait = true;
+      controller.abort();
     };
   }, [shouldLoad]);
 
