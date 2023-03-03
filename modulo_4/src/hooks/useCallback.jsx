@@ -14,6 +14,11 @@ Button.propTypes = {
 function App() {
   const [counter, setCounter] = useState(0);
 
+  // useCallback serve para colocar uma função em cache e mantê-la entre os re-renders
+  // pois a cada re-render, a função seria redeclarada. Uma função de fetch ou acesso a um BD
+  // não precisa ser redeclarada o tempo todo, apenas se alguma chave que passa para o fetch ou
+  // parâmetro mudar. Por isso passamos um array de dependências. Caso uma delas mude, aí que a
+  // será redeclarada
   const incrementCounter = useCallback((num) => {
     setCounter((c) => c + num);
   }, []);

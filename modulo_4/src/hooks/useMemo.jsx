@@ -44,6 +44,13 @@ function App() {
           onChange={(e) => setValue(e.target.value)}
         />
       </p>
+      {/**
+       * O useMemo serve para colocar um determindado trecho de jsx ou componente em cache.
+       * Ele conserva o componente sem renderizá-lo entre os re-renders da aplicação.
+       * Nesse caso, estamos conservando os componentes de posts sem mudá-los, já que são muitos
+       * e só convém re-renderizá-los se o estado contendo os posts mudar. Somente assim que os
+       * componentes em cache serão re-renderizados
+       */}
       {useMemo(() => {
         return (
           posts.length > 0 &&

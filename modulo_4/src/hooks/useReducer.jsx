@@ -28,6 +28,13 @@ const reducer = (state, action) => {
 };
 
 function App() {
+  // Com o useReducer, podemos trabalhar de maneira mais específica que o useState
+  // podemos definir diferentes comportamentos para setar o estado da nossa aplicação
+  // Inicialmente, passamos uma função reducer, responsável pelo fluxo de decisões e,
+  // em seguida, um objeto contendo o estado inicial a ser armazenado.
+  // Para nós é retornado um objeto com o estado para ser utilizado e uma função dispatch,
+  // que serve para engatilhar a mudança de estado. Para a dispatch, geralmente passamos um objeto
+  // contendo o tipo de ação e uma carga de informação (payload)
   const [state, dispatch] = useReducer(reducer, globalState);
   const { counter, title, body } = state;
 
